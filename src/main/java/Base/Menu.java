@@ -1,20 +1,8 @@
-package Base;
+package main.java.Base;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-<<<<<<< HEAD:src/main/java/Base/Menu.java
-<<<<<<< HEAD:main/java/Base/Menu.java
-import java.awt.GridLayout;
-
-import javax.swing.JFrame; 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-=======
 import javax.swing.*;
->>>>>>> 300c11ed04fa6c5d2a8cf9adf4c65f96615da703:src/main/java/Base/Menu.java
-=======
-import javax.swing.*;
->>>>>>> 300c11ed04fa6c5d2a8cf9adf4c65f96615da703:src/main/java/Base/Menu.java
 import javax.swing.border.EmptyBorder;
 import java.awt.event.*;
 
