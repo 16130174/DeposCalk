@@ -51,7 +51,9 @@ public class Menu extends JFrame {
 		Klient.setBounds(272, 23, 152, 49);
 		contentPane.add(Klient);
 		Klient.setBackground(new Color(200,250,250));
-		
+		ButtonGroup group = new ButtonGroup();
+		group.add(Rab);
+		group.add(Klient);
 		JLabel label = new JLabel("Введите логин");
 		label.setBounds(28, 105, 152, 34);
 		contentPane.add(label);
@@ -79,8 +81,15 @@ public class Menu extends JFrame {
 							if(textField_1.getText( ).equals(password)) {
 							new Rab().show();
 							setVisible(false);
-							}
-						}
+							}else {final JPanel panel = new JPanel();
+							JOptionPane.showMessageDialog(panel,"Логин или пароль введены неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+							textField.setText("");
+							textField_1.setText("");}
+							
+						}else {final JPanel panel = new JPanel();
+						JOptionPane.showMessageDialog(panel,"Логин или пароль введены неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+						textField.setText("");
+						textField_1.setText("");}
 			}
 			
 				if (Klient.isSelected()) {
@@ -89,8 +98,15 @@ public class Menu extends JFrame {
 							if(textField_1.getText( ).equals(password_kl)) {
 							new Klient().show();
 							setVisible(false);
-							}
-						} 
+							}else {final JPanel panel = new JPanel();
+							JOptionPane.showMessageDialog(panel,"Логин или пароль введены неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+							textField.setText("");
+							textField_1.setText("");}
+							
+						} else {final JPanel panel = new JPanel();
+						JOptionPane.showMessageDialog(panel,"Логин или пароль введены неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+						textField.setText("");
+						textField_1.setText("");}
 				}
 			}
 		});
