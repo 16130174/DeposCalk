@@ -133,57 +133,109 @@ public class Rab extends JFrame {
 				   }
 				});
 		
+		
 		tStavka = new JTextField();
+		/** Объявляем текстовое поле */
 		tStavka.setColumns(10);
+		/** Задаем длину строки*/
 		tStavka.setBounds(167, 149, 259, 24);
+		/** Задаем расположение и размеры текстового поля (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		contentPane.add(tStavka);
+		/** Добавляем текстовое поле на панель */
 		tStavka.addKeyListener(new KeyAdapter() {
+			/** Добавляем слушателя */
 			   public void keyTyped(KeyEvent e) {
+				   /** Метод вызывается, когда пользователь нажимает клавиши на клавитуре */
 				      char c = e.getKeyChar();
+				      /** Возвращает введенный с клавиатуры символ и присваивает его переменной с */
 				      if ( ((c < '0') || (c > '9'))) {
-				         e.consume();  // игнорим введенные буквы и пробел
+				    	  /** Указываем условия */
+				    	 final JPanel panel = new JPanel();
+				    	 /**Объялвяем панель */
+						 JOptionPane.showMessageDialog(panel,"Введен недопустимый символ!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+						 /** Выводим сообщение об ошибке, если введены символы, отличные от чисел */
+				         e.consume(); 
+				         /** игнорируем введенные буквы и пробел */
 				      }
 				   }
 				});
 		
 		Capitaliz = new JCheckBox("Без ежемесячной капитализации");
+		/** Задаем название чекбоксу */
 		Capitaliz.setBounds(170, 182, 254, 23);
+		/** Задаем расположение и размеры чекбокса (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		contentPane.add(Capitaliz);
+		/** Добавляем чекбокс на панель */
 		
 		VSummaNaKon = new JLabel("Итоговая сумма на конец срока, руб");
-		VSummaNaKon.setBounds(25, 280, 210, 36);
+		/** Объявляем JLabel */
+		VSummaNaKon.setBounds(25, 280, 220, 36);
+		/** Задаем расположение и размеры JLabel (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		contentPane.add(VSummaNaKon);
+		/** Добавляем текстовое поле на панель */
 		
 		tSummNaKon = new JTextField();
+		/** Объявляем текстовое поле */
 		tSummNaKon.setColumns(10);
-		tSummNaKon.setBounds(224, 280, 200, 36);
-		contentPane.add(tSummNaKon);	
-		
+		/** Задаем длину строки*/
+		tSummNaKon.setBounds(245, 280, 180, 36);
+		/** Задаем расположение и размеры текстового поля (расположение по x, расположение по y, высота, ширина (в пикселях)) */
+		contentPane.add(tSummNaKon);
+		/** Добавляем текстовое поле на панель */
+		tSummNaKon.addKeyListener(new KeyAdapter() {
+			/** Добавляем слушателя */
+			   public void keyTyped(KeyEvent e) {
+				   /** Метод вызывается, когда пользователь нажимает клавиши на клавитуре */
+				      char c = e.getKeyChar();
+				      /** Возвращает введенный с клавиатуры символ и присваивает его переменной с */
+				         e.consume();
+				         /** игнорируем введенные буквы и пробел */
+				   }
+				});
 		Chet = new JButton("Вычислить");
+		/** Задаем название кнопки */
 		Chet.addActionListener(e -> {
-			double s = Double.parseDouble((tSumm.getText( )));			//Старцев спросит "У Вас что? Заикание?"
-			double sr = Double.parseDouble((tSrok.getText( )));
-			double proc = Double.parseDouble((tStavka.getText( )));
+			s = Double.parseDouble((tSumm.getText( )));
+			sr = Double.parseDouble((tSrok.getText( )));
+			proc = Double.parseDouble((tStavka.getText( )));
+			/** Преобразуем строку в число и присваиваем переменное это значение
+			 * s -строка первоначальной суммы
+			 * sr - строка срока вложения
+			 * proc - строка процентной ставки */
 			if  (Capitaliz.isSelected()==true) {
+				/** Задаем условие при нажатии на чекбокс */
 				tSummNaKon.setText(""+(result= Summa(1,s,proc,sr)));
+				/** Присваиваем текстовому полю полученное значение */
 			}
 			else {
+				/** В случае, когда нажатие на чекбокс не производится */
 				tSummNaKon.setText(""+(result= Summa(0,s,proc,sr)));
 				/** Присваиваем текстовому полю полученное значение */
 			};
 		});
-		Chet.setForeground(Color.BLACK);
+		Chet.setForeground(Color.GRAY);
+		/** Задаем цвет текста кнопки */
+		Chet.setBackground(Color.WHITE);
+		/** Определяем цвет кнопки */
 		Chet.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		/** Задаем стиль шрифта, размер текста на кнопке */
 		Chet.setBounds(131, 212, 163, 40);
+		/** Задаем расположение и размеры кнопки (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		contentPane.add(Chet);
+		/** Добавляем кнопку на панель */
 	}
-	public double Summa(int Cap_sel, double s,double p,double sr) {
+	public double Summa(int Cap_sel, double s,double p,double sr) { 
 		  double summa;
 		  if (Cap_sel == 1){
+			  /** Задаем условие при нажатии на чекбокс */
 			  summa = s+(((s*p*sr)/100)/12);
+			  /** Формула для расчета без капитализации */
 		  }
 		  else {
+			  /** В случае, когда нажатие на чекбокс не производится */
 			  summa = s*Math.pow(1+sr*p/12/100, sr);}
+		  /** Формула для расчета с капитализацией */
 			return summa;
+			/** Возвращает управление вызывающему объекту */
 		}
 }
