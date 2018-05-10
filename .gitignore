@@ -12,3 +12,4 @@ bin/
 # Maven
 log/
 target/
+src/main/java/Base/Menu.java
