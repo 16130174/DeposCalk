@@ -1,131 +1,215 @@
 package Base;
-
+/** Указываем на то, что класс принадлежит пакету */
 import javax.swing.*;
+/**  Подключаем библиотеку для создания графического интерфейса для программ  */
 import javax.swing.border.EmptyBorder;
+/** Импортируем библиотеку для создания пустой рамки, которая позволяет создать отступы вокруг панели */
+import java.awt.Color;
+/** Импортируем библиотеку цветов  */
+import java.awt.Font;
+/** Импортируем библиотеку шрифтов */
 import java.awt.event.*;
+/** Импортируем библиотеку интерфейсов ActionListener */
 
 public class Klient extends JFrame {
-	private static final long serialVersionUID = 1;
+	/** Создаем класс, наследуемый от класса JFrame */
 	public static Klient frame = new Klient();
+	/** Задаем переменную для формы калькулятора клиента */
 	private JPanel Klien;
-	private JLabel VSum;
-	private JLabel VSumKon;
-	private JLabel Vproc;
-	private JLabel Vsroc;
-	private JTextField Summa;
-	private JTextField SummaKon;
-	private JTextField Sroc;
-	private JTextField Proc;
+	/** Задаем переменную панели */
+	private JLabel VSum,VSumKon,Vproc,Vsroc;
+	/** Задаем переменные JLabel */
+	private JTextField Summa, SummaKon, Sroc, Proc;
+	/** Задаем переменные текстовых полей */
 	private JButton Chet;
-	
-public static String s;
-public static double sk;
-public static double st;
-public static double sroc;
-double rezult;  
-	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the frame.
-	 */
+	/** Задаем переменную кнопки */
+	double s;
+	double sk;
+	double st;
+	double result;  
+	/** Обьъявляем переменные и их тип данных
+	 * s - Первоначальная сумма
+	 * sk - Желаемая сумма на конец срока
+	 * st - процентная ставка
+	 * result - Результат вычислений*/
+
 	public Klient() {
+		/**
+		 * Создаем форму калькулятора клиента 
+		 */
 		setTitle("Калькулятор клиента");
+		/** Обьявляем название формы */
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		/** Определяем способ закрытия формы */
 		setBounds(100, 100, 450, 300);
+		/** Задаем расположение и размеры формы (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien = new JPanel();
+		/**  Обьявляем форму */
 		Klien.setBorder(new EmptyBorder(5, 5, 5, 5));
+		/** Создаем граничные отступы (сверху, слева, снизу, справа) */
 		setContentPane(Klien);
+		/** Заменяем панель содержимого окна, для возможности использование панелей класса JPanel */
 		Klien.setLayout(null);
+		/** Запрещаем использование предусмотренного по умолчанию механизма управления размещения компонентнов
+		 * Используем для самостоятельного размещения компонентов */
 		
 		VSum = new JLabel("Введите перовначальную сумму вклада, руб.");
-		VSum.setBounds(20, 11, 246, 24);
+		/** Задаем название JLabel */
+		VSum.setBounds(20, 11, 270, 24);
+		/** Задаем расположение и размеры JLabel (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(VSum);
+		/** Добавляем JLabel на панель */
 		
 		VSumKon = new JLabel("Введите желаемую сумму на конец срока, руб.");
-		VSumKon.setBounds(20, 57, 246, 24);
+		/** Задаем название JLabel */
+		VSumKon.setBounds(20, 57, 280, 24);
+		/** Задаем расположение и размеры JLabel (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(VSumKon);
+		/** Добавляем JLabel на панель */
 		
 		Vproc = new JLabel("Введите процентную ставку, %");
-		Vproc.setBounds(20, 111, 246, 24);
+		/** Задаем название JLabel */
+		Vproc.setBounds(20, 103, 246, 24);
+		/** Задаем расположение и размеры JLabel (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(Vproc);
+		/** Добавляем JLabel на панель */
 		
 		Vsroc = new JLabel("Срок вашего вклада составит, мес.");
+		/** Задаем название JLabel */
 		Vsroc.setBounds(20, 211, 246, 24);
+		/** Задаем расположение и размеры JLabel (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(Vsroc);
+		/** Добавляем JLabel на панель */
 		
 		Chet = new JButton("Рассчитать");
-		Chet.addActionListener(e -> {
-			////////////////WHAT TO DO HERE???////////////////////////
-		});
+		/** Задаем название кнопки */
 		Chet.setBounds(118, 149, 164, 37);
+		/** Задаем расположение и размеры кнопки (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(Chet);
+		/** Добавляем кнопку на панель */
 		
 		Chet.addActionListener(e -> {
-			double sk = Integer.parseInt(SummaKon.getText());
-			double s = Integer.parseInt(Summa.getText());
-			double st = Integer.parseInt(Proc.getText());
-			double result;
-				Sroc.setText(""+(result= Calk(sk,s,st)));
-
+			sk = Double.parseDouble(SummaKon.getText());
+			s = Double.parseDouble(Summa.getText());
+			st = Double.parseDouble(Proc.getText());
+			/** Преобразуем строку в число и присваиваем переменное это значение
+			 * sk - строка суммы на конец срока
+			 * s -строка первоначальной суммы
+			 * st - строка процентной ставки */
+			Sroc.setText(""+(result= Calk(sk,s,st)));
+			/** Присваиваем текстовому полю полученное значение */
 			}
 		);
+		Chet.setForeground(Color.GREEN);
+		/** Задаем цвет текста кнопки */
+		Chet.setBackground(Color.DARK_GRAY);
+		/** Определяем цвет кнопки */
+		Chet.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		/** Задаем стиль шрифта, размер текста на кнопке */
 
 		Summa = new JTextField();
-		Summa.setBounds(286, 13, 138, 24);
+		/** Объявляем текстовое поле */
+		Summa.setBounds(294, 13, 130, 24);
+		/** Задаем расположение и размеры текстового поля (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(Summa);
+		/** Добавляем текстовое поле на панель */
 		Summa.setColumns(10);
+		/** Задаем длину строки*/
 		Summa.addKeyListener(new KeyAdapter() {
+			/** Добавляем слушателя */
 			   public void keyTyped(KeyEvent e) {
+				   /** Метод вызывается, когда пользователь нажимает клавиши на клавитуре */
 				      char c = e.getKeyChar();
+				      /** Возвращает введенный с клавиатуры символ и присваивает его переменной с */
 				      if ( ((c < '0') || (c > '9'))) {
-				         e.consume();  // игнорим введенные буквы и пробел
+				    	  /** Указываем условия */
+				    	 final JPanel panel = new JPanel();
+				    	 /**Объялвяем панель */
+						 JOptionPane.showMessageDialog(panel,"Введен недопустимый символ!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+						 /** Выводим сообщение об ошибке, если введены символы, отличные от чисел */
+				         e.consume(); 
+				         /** игнорируем введенные буквы и пробел */
 				      }
 				   }
 				});
 		
 		SummaKon = new JTextField();
+		/** Объявляем текстовое поле */
 		SummaKon.setColumns(10);
-		SummaKon.setBounds(286, 59, 138, 24);
+		/** Задаем длину строки*/
+		SummaKon.setBounds(294, 59, 130, 24);
+		/** Задаем расположение и размеры текстового поля (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(SummaKon);
+		/** Добавляем текстовое поле на панель */
 		SummaKon.addKeyListener(new KeyAdapter() {
+			/** Добавляем слушателя */
 			   public void keyTyped(KeyEvent e) {
+				   /** Метод вызывается, когда пользователь нажимает клавиши на клавитуре */
 				      char c = e.getKeyChar();
+				      /** Возвращает введенный с клавиатуры символ и присваивает его переменной с */
 				      if ( ((c < '0') || (c > '9'))) {
-				         e.consume();  // игнорим введенные буквы и пробел
+				    	  /** Указываем условия */
+				    	 final JPanel panel = new JPanel();
+				    	 /**Объялвяем панель */
+						 JOptionPane.showMessageDialog(panel,"Введен недопустимый символ!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+						 /** Выводим сообщение об ошибке, если введены символы, отличные от чисел */
+				         e.consume(); 
+				         /** игнорируем введенные буквы и пробел */
 				      }
 				   }
 				});
 		
 		Proc = new JTextField();
+		/** Объявляем текстовое поле */
 		Proc.setColumns(10);
-		Proc.setBounds(286, 99, 138, 24);
+		/** Задаем длину строки*/
+		Proc.setBounds(286, 103, 138, 24);
+		/** Задаем расположение и размеры текстового поля (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(Proc);
+		/** Добавляем текстовое поле на панель */
 		Proc.addKeyListener(new KeyAdapter() {
+			/** Добавляем слушателя */
 			   public void keyTyped(KeyEvent e) {
+				   /** Метод вызывается, когда пользователь нажимает клавиши на клавитуре */
 				      char c = e.getKeyChar();
+				      /** Возвращает введенный с клавиатуры символ и присваивает его переменной с */
 				      if ( ((c < '0') || (c > '9'))) {
-				         e.consume();  // игнорим введенные буквы и пробел
+				    	  /** Указываем условия */
+				    	 final JPanel panel = new JPanel();
+				    	 /**Объялвяем панель */
+						 JOptionPane.showMessageDialog(panel,"Введен недопустимый символ!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+						 /** Выводим сообщение об ошибке, если введены символы, отличные от чисел */
+				         e.consume(); 
+				         /** игнорируем введенные буквы и пробел */
 				      }
 				   }
 				});
 		
 		Sroc = new JTextField();
+		/** Объявляем текстовое поле */
 		Sroc.setColumns(10);
+		/** Задаем длину строки*/
 		Sroc.setBounds(286, 211, 138, 24);
+		/** Задаем расположение и размеры текстового поля (расположение по x, расположение по y, высота, ширина (в пикселях)) */
 		Klien.add(Sroc);
+		/** Добавляем текстовое поле на панель */
 		Sroc.addKeyListener(new KeyAdapter() {
+			/** Добавляем слушателя */
 			   public void keyTyped(KeyEvent e) {
+				   /** Метод вызывается, когда пользователь нажимает клавиши на клавитуре */
 				      char c = e.getKeyChar();
-				      if ( ((c < '0') || (c > '9'))) {
-				         e.consume();  // игнорим введенные буквы и пробел
-				      }
+				      /** Возвращает введенный с клавиатуры символ и присваивает его переменной с */
+				         e.consume();
+				         /** игнорируем введенные буквы и пробел */
 				   }
 				});
 	}
 		public double Calk( double sk,double s,double st) {
 			  double sroc;
+			  /** Задаем тип данных переменной */
 				  sroc = 12*(sk-s)/((st/100)*s);
+				  /** Формула для расчета */
 				return sroc;
+				/** Возвращает управление вызывающему объекту */
 			}
 			}
