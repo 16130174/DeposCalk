@@ -1,5 +1,4 @@
 package Base;
-/** Указываем на то, что класс принадлежит пакету */
 import javax.swing.*;
 /**  Подключаем библиотеку для создания графического интерфейса для программ  */
 import javax.swing.border.EmptyBorder;
